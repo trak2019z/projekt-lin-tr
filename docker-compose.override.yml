@@ -6,10 +6,12 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=44367
-      - ConnectionStrings:DefaultConnection=Server=quickapp.sqldb;Database=QuickApp;User Id=sa;Password=Pass@word
-      - SmtpConfig:Host=quickapp.mail
-      - SmtpConfig:Port=1025
-      - SmtpConfig:Username=
+      #- ASPNETCORE_Kestrel__Certificates__Default__Password="Aaa123456"
+      #- ASPNETCORE_Kestrel__Certificates__Default__Path=/app/aspnetapp.pfx
+      #- ConnectionStrings:Server=192.168.32.2;Port=5432;Database=QuickApp;User Id=postgres;Password=Aaa123456;
+      # - SmtpConfig:Host=quickapp.mail
+      #- SmtpConfig:Port=1025
+      # - SmtpConfig:Username=
       # fix for docker ssl issue
       # RUN THIS Command in Command prompt
       # dotnet dev-certs https -ep C:\Users\{user}\AppData\Roaming\ASP.NET\Https\QuickApp.pfx -p 348ff0ae-db78-4801-9094-52b065a1aa3b
@@ -23,9 +25,8 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
-  quickapp.sqldb:
+  quickapp.postgresdb:
     ports:
-     - "5467:1433"
+     - "54320:5432"
     environment:
-     - SA_PASSWORD=Pass@word
-     - ACCEPT_EULA=Y 
+     - POSTGRES_PASSWORD=Aaa123456

@@ -6,15 +6,41 @@ services:
     build:
       context: .
       dockerfile: Projekt LIN/Projekt_LIN/Dockerfile
+    environment:
+      - ConnectionStrings:Server=192.168.96.2;Port=5432;Database=QuickApp;User Id=postgres;Password=Aaa123456;
     depends_on:
-     - quickapp.sqldb
-     - quickapp.mail
+     - quickapp.postgresdb
+    #networks:
+    #  - quickapp
+    # - quickapp.mail
 
-  quickapp.sqldb:
-    image: microsoft/mssql-server-linux
+  quickapp.postgresdb:
+    image: "postgres"
+#   Setup the username, password, and database name. You can changes these values.
+    environment:
+      - POSTGRES_PASSWORD=Aaa123456
+#   Maps port 54320 (localhost) to port 5432 on the container. You can change the ports to fix your needs.
+    ports:
+      - "54320:5432"
+    volumes:
+      - postgres-data2:/var/lib/postgresql/data
+    #networks: 
+    #  - quickapp
 
-  quickapp.mail:
-     image: mailhog/mailhog
-     ports:
-      - "8025:8025"
-      - "1125:1025"
+networks:
+  default:
+    external:
+        name: quickapp
+volumes:
+  postgres-data2:
+    driver: local
+  #adminer:
+  #  image: adminer
+  #  restart: always
+  #  ports:
+  #    - 8080:8080
+  #quickapp.mail:
+  #   image: mailhog/mailhog
+  #   ports:
+  #    - "8025:8025"
+  #    - "1125:1025"

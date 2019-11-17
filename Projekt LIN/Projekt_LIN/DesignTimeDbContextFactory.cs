@@ -28,7 +28,8 @@ namespace Projekt_LIN
 
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
-            builder.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("Projekt_LIN"));
+            //builder.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("Projekt_LIN"));
+            builder.UseNpgsql(configuration["ConnectionStrings:DefaultConnection"]);//, b => b.MigrationsAssembly("Projekt_LIN"));
 
             return new ApplicationDbContext(builder.Options);
         }

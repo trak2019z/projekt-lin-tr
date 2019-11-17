@@ -25,6 +25,7 @@ using Projekt_LIN.Helpers;
 using System;
 using System.Collections.Generic;
 using AppPermissions = DAL.Core.ApplicationPermissions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Projekt_LIN
 {
@@ -40,12 +41,12 @@ namespace Projekt_LIN
             Configuration = configuration;
         }
 
-
+       
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("Projekt_LIN")));
+                options.UseNpgsql(Configuration["ConnectionStrings:DefaultConnection"]));//, b => b.MigrationsAssembly("Projekt_LIN")));
 
             // add identity
             services.AddIdentity<ApplicationUser, ApplicationRole>()
@@ -77,6 +78,7 @@ namespace Projekt_LIN
                 // This might be useful to get started, but needs to be replaced by some persistent key material for production scenarios.
                 // See http://docs.identityserver.io/en/release/topics/crypto.html#refcrypto for more information.
                 .AddDeveloperSigningCredential()
+                //.AddSigningCredential(LoadCertificate())
                 .AddInMemoryPersistedGrants()
                 // To configure IdentityServer to use EntityFramework (EF) as the storage mechanism for configuration data (rather than using the in-memory implementations),
                 // see https://identityserver4.readthedocs.io/en/release/quickstarts/8_entity_framework.html

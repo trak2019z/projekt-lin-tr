@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using DAL;
 using Microsoft.AspNetCore;
@@ -31,6 +32,7 @@ namespace Projekt_LIN
 
                 try
                 {
+                    var host1 = Dns.GetHostEntry(Dns.GetHostName());
                     var databaseInitializer = services.GetRequiredService<IDatabaseInitializer>();
                     databaseInitializer.SeedAsync().Wait();
                 }
