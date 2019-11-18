@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 using Projekt_LIN.Helpers;
 
 namespace Projekt_LIN
@@ -44,7 +45,7 @@ namespace Projekt_LIN
                     throw new Exception(LoggingEvents.INIT_DATABASE.Name, ex);
                 }
             }
-
+            IdentityModelEventSource.ShowPII = true;
             host.Run();
         }
 

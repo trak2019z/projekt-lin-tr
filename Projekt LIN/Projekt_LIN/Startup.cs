@@ -78,8 +78,8 @@ namespace Projekt_LIN
                 // This might be useful to get started, but needs to be replaced by some persistent key material for production scenarios.
                 // See http://docs.identityserver.io/en/release/topics/crypto.html#refcrypto for more information.
                 .AddDeveloperSigningCredential()
-                //.AddSigningCredential(LoadCertificate())
-                .AddInMemoryPersistedGrants()
+                .AddSigningCredential(new X509Certificate2("/app/ssl.pfx","Aaa123456"))
+                //.AddInMemoryPersistedGrants()
                 // To configure IdentityServer to use EntityFramework (EF) as the storage mechanism for configuration data (rather than using the in-memory implementations),
                 // see https://identityserver4.readthedocs.io/en/release/quickstarts/8_entity_framework.html
                 .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())

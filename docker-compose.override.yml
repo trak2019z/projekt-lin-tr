@@ -3,11 +3,11 @@ version: '3.4'
 services:
   projekt_lin:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:44367;http://+:80
       - ASPNETCORE_HTTPS_PORT=44367
-      #- ASPNETCORE_Kestrel__Certificates__Default__Password="Aaa123456"
-      #- ASPNETCORE_Kestrel__Certificates__Default__Path=/app/aspnetapp.pfx
+      #- ASPNETCORE_Kestrel__Certificates__Default__Password=Aaa123456
+      #- ASPNETCORE_Kestrel__Certificates__Default__Path=/aspnetapp.pfx
       #- ConnectionStrings:Server=192.168.32.2;Port=5432;Database=QuickApp;User Id=postgres;Password=Aaa123456;
       # - SmtpConfig:Host=quickapp.mail
       #- SmtpConfig:Port=1025
@@ -16,11 +16,13 @@ services:
       # RUN THIS Command in Command prompt
       # dotnet dev-certs https -ep C:\Users\{user}\AppData\Roaming\ASP.NET\Https\QuickApp.pfx -p 348ff0ae-db78-4801-9094-52b065a1aa3b
       #- ASPNETCORE_Kestrel__Certificates__Default__Password="EEC316E2-29A4-4E0C-995A-1E1EC4ABBB99" 
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Aaa123456
       #- ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.aspnet/https/QuickApp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/ssl.pfx
 
     ports:
       - "6780:80"
-      - "44367:443"
+      - "44367:44367"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
