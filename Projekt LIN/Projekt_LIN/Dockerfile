@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim-arm32v7 AS base
 
 RUN apt-get update
 RUN apt-get install -y curl ca-certificates nano openssl
@@ -7,7 +7,7 @@ RUN apt install -y nodejs
 RUN npm -v
 #WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster-arm32v7 AS build
 WORKDIR /src
 COPY ["Projekt LIN/Projekt_LIN/Projekt_LIN.csproj", "Projekt LIN/Projekt_LIN/"]
 COPY ["Projekt LIN/DAL/DAL.csproj", "Projekt LIN/DAL/"]
