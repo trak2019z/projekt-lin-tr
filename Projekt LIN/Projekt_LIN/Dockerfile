@@ -1,26 +1,9 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
 
-# NODE
-# ENV NODE_VERSION 12.13.0
-# ENV NODE_DOWNLOAD_URL https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz
-# https://nodejs.org/download/release/v8.11.3/SHASUMS256.txt
-# ENV NODE_DOWNLOAD_SHA 49a7374670a111b033ce16611b20fd1aafd3296bbc662b184fe8fb26a29c22cc
-
-#RUN curl -SL "$NODE_DOWNLOAD_URL" --output nodejs.tar.gz
-    ##&& echo "$NODE_DOWNLOAD_SHA nodejs.tar.gz" | sha256sum -c - \
-#RUN tar -xzf "nodejs.tar.gz" -C /usr/local --strip-components=1
-#RUN rm nodejs.tar.gz 
-#RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs
-# END NODE
-
-WORKDIR /app
-EXPOSE 6780
-EXPOSE 44367
-
 RUN apt-get update
-RUN apt-get install -y npm ca-certificates nano openssl
-
-RUN npm install -g npm@6.9
+RUN apt-get install -y curl ca-certificates nano openssl
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt install -y nodejs
 RUN npm -v
 #WORKDIR /app
 
@@ -34,9 +17,9 @@ COPY . .
 
 WORKDIR "/src/Projekt LIN/Projekt_LIN"
 RUN apt-get update
-RUN apt-get install -y npm 
-
-RUN npm install -g npm@6.9
+RUN apt-get install -y curl 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt install -y nodejs
 RUN npm -v
 WORKDIR "/src/Projekt LIN/Projekt_LIN/ClientApp"
 
