@@ -23,7 +23,7 @@ services:
     ports:
       - "54320:5432"
     volumes:
-      - postgres-data2:/var/lib/postgresql/data
+      - ~/postgres-data:/var/lib/postgresql/data
     #networks: 
     #  - quickapp
 
@@ -31,9 +31,9 @@ networks:
   default:
     external:
         name: quickapp
-volumes:
-  postgres-data2:
-    driver: local
+#volumes:
+#  postgres-data2:
+#    driver: local
   #adminer:
   #  image: adminer
   #  restart: always

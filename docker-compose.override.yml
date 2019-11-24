@@ -23,9 +23,9 @@ services:
     ports:
       - "6780:80"
       - "44367:44367"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    #volumes:
+    #  - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    #  - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
   quickapp.postgresdb:
     ports:
